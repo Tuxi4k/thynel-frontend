@@ -2,5 +2,6 @@ import "@unocss/reset/tailwind.css"
 import "virtual:uno.css"
 
 import { render } from "solid-js/web"
+import { App } from "./app/App"
 
-render(() => <></>, document.getElementById("root")!)
+render(() => <App />, document.getElementById("root")!)

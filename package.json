@@ -13,7 +13,10 @@
     "check": "tsc -b && oxlint && oxfmt --check"
   },
   "dependencies": {
-    "solid-js": "^1.9.15"
+    "@iconify-json/solar": "^1.2.13",
+    "@solidjs/router": "^1.0.0",
+    "solid-js": "^1.9.15",
+    "unocss-merge": "^0.10.0"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
