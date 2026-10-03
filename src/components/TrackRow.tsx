@@ -1,0 +1,29 @@
+import { Button } from "@/components/ui/Button"
+import { formatDuration } from "@/lib/format"
+
+export function TrackRow(props: {
+  title: string
+  artist?: string
+  duration: number
+}) {
+  return (
+    <li class="flex items-center gap-3 px-4 py-3 bg-surface border rounded-lg border-edge">
+      <div class="w-10 h-10 rounded-2.5 bg-elevated flex items-center justify-center shrink-0">
+        <i class="i-solar:play-linear w-4 h-4 text-accent" />
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-sm font-medium">{props.title}</p>
+        <p class="truncate text-xs text-text-dim mt-0.5">{props.artist}</p>
+      </div>
+
+      <span class="text-xs text-text-dim tabular-nums shrink-0">
+        {formatDuration(props.duration)}
+      </span>
+
+      <Button size="icon">
+        <i class="i-solar:menu-dots-bold w-4 h-4" />
+      </Button>
+    </li>
+  )
+}
