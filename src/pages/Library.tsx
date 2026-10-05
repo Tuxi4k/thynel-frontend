@@ -1,11 +1,10 @@
 import { Show, createSignal } from "solid-js"
 import { EmptyState } from "@/components/EmptyState"
-import { MixRow } from "@/components/MixRow"
-import { PlaylistRow } from "@/components/PlaylistRow"
-import { TrackRow } from "@/components/TrackRow"
 import { Button } from "@/components/ui/Button"
 import { List } from "@/components/ui/List"
+import { Row } from "@/components/ui/Row"
 import { TabButton } from "@/components/ui/TabButton"
+import { formatDuration, plural } from "@/lib/format"
 import { MOCK_MIXES, MOCK_PLAYLISTS, MOCK_TRACKS } from "@/mock/library"
 
 export function Library() {
@@ -56,7 +55,18 @@ export function Library() {
               </EmptyState>
             }
           >
-            {(track) => <TrackRow {...track} />}
+            {(track) => (
+              <Row
+                cover={<i class="i-solar:play-linear w-4 h-4 text-accent" />}
+                title={track.title}
+                subtitle={track.artist ?? "Unknown artist"}
+                trailing={
+                  <span class="text-xs text-text-dim tabular-nums shrink-0">
+                    {formatDuration(track.duration)}
+                  </span>
+                }
+              />
+            )}
           </List>
         </Show>
 
@@ -70,7 +80,17 @@ export function Library() {
               </EmptyState>
             }
           >
-            {(playlist) => <PlaylistRow {...playlist} />}
+            {(playlist) => (
+              <Row
+                cover={
+                  <span class="text-accent font-semibold text-sm">
+                    {playlist.name.charAt(0).toUpperCase()}
+                  </span>
+                }
+                title={playlist.name}
+                subtitle={`${playlist.trackCount} ${plural(playlist.trackCount, "track", "tracks")} · ${playlist.updatedAt}`}
+              />
+            )}
           </List>
         </Show>
 
@@ -84,7 +104,13 @@ export function Library() {
               </EmptyState>
             }
           >
-            {(mix) => <MixRow {...mix} />}
+            {(mix) => (
+              <Row
+                cover={<i class="i-solar:shuffle-bold w-4 h-4 text-accent" />}
+                title={mix.name}
+                subtitle={`${mix.trackCount} ${plural(mix.trackCount, "track", "tracks")} · from ${mix.sourceCount} ${plural(mix.sourceCount, "playlist", "playlists")}`}
+              />
+            )}
           </List>
         </Show>
       </div>
